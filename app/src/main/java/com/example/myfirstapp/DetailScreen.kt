@@ -36,7 +36,7 @@ fun DetailScreen(
                         )
                     }
                     Spacer(Modifier.weight(1f, true))
-                    Text("Detail screen $id", fontSize = 24.sp)
+                      Text("Detail screen $id", fontSize = 28.sp)
 
                 }
             }
