@@ -31,7 +31,7 @@ fun DetailScreen(
                 Row(verticalAlignment = Alignment.CenterVertically) {
                     IconButton(onClick = {  onNavigateToHome.invoke() }) {Icon(Icons.Filled.ArrowBack, contentDescription = "Меню") }
 
-                Text( title + " ", fontSize = 24.sp)
+                Text("$title ", fontSize = 24.sp)
                 Text(description, fontSize = 24.sp)
                 }
         }
