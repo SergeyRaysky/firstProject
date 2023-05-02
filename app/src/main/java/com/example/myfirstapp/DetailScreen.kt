@@ -29,13 +29,18 @@ fun DetailScreen(
         topBar = {
             TopAppBar() {
                 Row(verticalAlignment = Alignment.CenterVertically) {
-                    IconButton(onClick = {  onNavigateToHome.invoke() }) {Icon(Icons.Filled.ArrowBack, contentDescription = "Меню") }
-                Text("$title ", fontSize = 24.sp)
-                Text(description, fontSize = 24.sp)
+                    IconButton(onClick = { onNavigateToHome.invoke() }) {
+                        Icon(
+                            Icons.Filled.ArrowBack,
+                            contentDescription = "Меню"
+                        )
+                    }
+                    Spacer(Modifier.weight(1f, true))
+                    Text("$id", fontSize = 24.sp)
                 }
+            }
         }
-        }
-    ){
+    ) {
         Column(
             modifier = Modifier.fillMaxSize(),
             verticalArrangement = Arrangement.Center,
@@ -47,7 +52,8 @@ fun DetailScreen(
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null
             )
-
+            Text("$title ", fontSize = 32.sp)
+            Text(description, fontSize = 32.sp)
 
         }
     }
