@@ -92,11 +92,26 @@ fun Element(
     i: Int,
     onNavigateToDetails: (Int, String, String) -> Unit,
 ) {
+    val colors = listOf(
+        Color.Red,
+        Color.Green,
+        Color.Yellow,
+        Color.Blue,
+        Color.Cyan,
+        Color.DarkGray,
+        Color.Gray,
+        Color.LightGray,
+        Color.Magenta,
+        Color.Transparent,
+        Color.Unspecified
+    )
+    val color = remember {
+        mutableStateOf(colors.random())
+    }
     val stateBg = remember {
         mutableStateOf(false)
 
     }
-    val color = colorResource(id = R.color.red)
     val context = LocalContext.current
     val title = "Title $i"
     val description = "Description $i"
@@ -113,9 +128,10 @@ fun Element(
                     )
                     .show()
                 //                stateBg.value = !stateBg.value
-                onNavigateToDetails.invoke(i,title, description)
+                onNavigateToDetails.invoke(i, title, description)
             }
-        //            .background(if (stateBg.value) Color.Red else Color.White)
+            //            .background(if (stateBg.value) Color.Red else Color.White)
+            .background(color.value)
     ) {
 
 
