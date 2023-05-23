@@ -1,10 +1,6 @@
 package com.example.myfirstapp
 
-import android.icu.text.CaseMap
-import android.text.style.AlignmentSpan
-import androidx.compose.foundation.background
-import androidx.compose.foundation.border
-import androidx.compose.foundation.clickable
+import android.widget.Toast
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
@@ -12,11 +8,10 @@ import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+
 
 @Composable
 fun DetailScreen(
@@ -35,7 +30,6 @@ fun DetailScreen(
                             contentDescription = "Меню"
                         )
                     }
-                    Spacer(Modifier.weight(1f, true))
                     Text("$id", fontSize = 24.sp)
                 }
             }
@@ -57,7 +51,15 @@ fun DetailScreen(
 
         }
     }
+
 }
-
-
+//private var back_pressed: Long = 0
+//
+//fun onBackPressed() {
+//    if (back_pressed + 2000 > System.currentTimeMillis()) onBackPressed() else Toast.makeText(
+//        TODO(), "Press once again to exit!",
+//        Toast.LENGTH_SHORT
+//    ).show()
+//    back_pressed = System.currentTimeMillis()
+//}
 

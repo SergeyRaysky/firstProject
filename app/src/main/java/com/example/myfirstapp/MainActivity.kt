@@ -1,33 +1,45 @@
 package com.example.myfirstapp
 
 
+import android.graphics.Color
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
-import androidx.compose.foundation.layout.fillMaxSize
-import androidx.compose.material.MaterialTheme
-import androidx.compose.material.Surface
-import androidx.compose.material.Text
-import androidx.compose.runtime.Composable
-import androidx.compose.runtime.mutableStateOf
-import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
+import androidx.compose.ui.graphics.Color.Companion.Red
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
-import com.example.myfirstapp.ui.theme.MyFirstAppTheme
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
             val navController = rememberNavController()
+            val colors = listOf(
+                Color.RED,
+                Color.GREEN,
+                Color.YELLOW,
+                Color.BLUE,
+                Color.CYAN,
+                Color.DKGRAY,
+                Color.GRAY,
+                Color.LTGRAY,
+                Color.MAGENTA,
+                Color.TRANSPARENT
+            )
+            val list = List(100) {
+                com.example.myfirstapp.Item(
+                    id = it,
+                    color = colors.random()
+                )
+            }
             NavHost(navController = navController, startDestination = "home") {
                 composable("home") {
                     HomeScreen(
-                        onNavigateToDetails = {arg,title,description -> navController.navigate("detailScreen/$arg,$title,$description")}
+                        data = list,
+                        onNavigateToDetails = { arg, title, description -> navController.navigate("detailScreen/$arg,$title,$description") }
                     )
                 }
                 composable(

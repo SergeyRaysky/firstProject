@@ -1,57 +1,25 @@
 package com.example.myfirstapp
 
-import android.content.res.AssetManager
-import android.text.style.BackgroundColorSpan
 import android.util.Log
-import android.widget.TextClock
 import android.widget.Toast
-import androidx.compose.animation.AnimatedContentScope.SlideDirection.Companion.Start
 import androidx.compose.foundation.*
-import androidx.compose.foundation.interaction.DragInteraction
 import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
-import androidx.compose.foundation.lazy.items
-import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.CutCornerShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
-import androidx.compose.ui.Alignment
-import androidx.compose.ui.Alignment.Companion.BottomCenter
-import androidx.compose.ui.Alignment.Companion.Center
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.Shape
-import androidx.compose.ui.modifier.modifierLocalConsumer
-import androidx.compose.ui.modifier.modifierLocalOf
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.res.colorResource
-import androidx.compose.ui.res.fontResource
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.TextLayoutResult
-import androidx.compose.ui.text.font.FontFamily
-import androidx.compose.ui.text.font.FontStyle
-import androidx.compose.ui.text.font.FontWeight
-import androidx.compose.ui.text.style.TextAlign
-import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import androidx.navigation.NavController
-import androidx.navigation.compose.NavHost
-import androidx.navigation.compose.composable
-import androidx.navigation.compose.rememberNavController
-import kotlinx.coroutines.newFixedThreadPoolContext
-import org.intellij.lang.annotations.JdkConstants
-import java.sql.RowId
-import kotlin.random.Random
 
 @Composable
 fun HomeScreen(
+    data: List<Item>,
     onNavigateToDetails: (Int, String, String) -> Unit,
 ) {
     Scaffold(
@@ -68,18 +36,26 @@ fun HomeScreen(
         }
     ) {
 
+
         Log.d("TAG", "-------HomeScreen----------")
 
-        val list = List(100) { it }
-        LazyColumn() {
+
+        LazyColumn(
+            verticalArrangement = Arrangement.spacedBy(4.dp),
+            modifier = Modifier
+                .border(width = 2.dp, color = Color.Blue)
+                .padding(12.dp)
+        ) {
             items(
-                list.size,
+                data.size,
                 itemContent = {
                     Element(
-                        i = it,
+                        id = data[it].id,
+                        color = data[it].color,
                         onNavigateToDetails
                     )
                 })
+
         }
     }
 
@@ -89,33 +65,18 @@ fun HomeScreen(
 
 @Composable
 fun Element(
-    i: Int,
+    id: Int,
+    color: Int,
     onNavigateToDetails: (Int, String, String) -> Unit,
 ) {
-    val colors = listOf(
-        Color.Red,
-        Color.Green,
-        Color.Yellow,
-        Color.Blue,
-        Color.Cyan,
-        Color.DarkGray,
-        Color.Gray,
-        Color.LightGray,
-        Color.Magenta,
-        Color.Transparent,
-        Color.Unspecified
-    )
-    val color = remember {
-        mutableStateOf(colors.random())
-    }
     val stateBg = remember {
         mutableStateOf(false)
 
     }
     val context = LocalContext.current
-    val title = "Title $i"
-    val description = "Description $i"
-    Log.d("TAG", "-------Element $i----------")
+    val title = "Title $id"
+    val description = "Description $id"
+    Log.d("TAG", "-------Element $id----------")
     Row(
         modifier = Modifier
             .fillMaxWidth()
@@ -123,15 +84,17 @@ fun Element(
                 Toast
                     .makeText(
                         context,
-                        "Вы нажали на  $i",
+                        "Вы нажали на  $id",
                         Toast.LENGTH_SHORT
                     )
                     .show()
                 //                stateBg.value = !stateBg.value
-                onNavigateToDetails.invoke(i, title, description)
+                onNavigateToDetails.invoke(id, title, description)
             }
             //            .background(if (stateBg.value) Color.Red else Color.White)
-            .background(color.value)
+            .background(Color(color))
+            .border(width = 3.dp, color = Color.Black)
+            .padding(16.dp)
     ) {
 
 
