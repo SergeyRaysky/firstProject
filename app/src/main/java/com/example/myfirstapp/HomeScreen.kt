@@ -19,12 +19,13 @@ import androidx.compose.ui.unit.sp
 
 @Composable
 fun HomeScreen(
-    data: List<Item>,
-    onNavigateToDetails: (Int, String, String) -> Unit,
+    viewModel: HomeViewModel,
+    onNavigateToDetails: (Int, String, String, Int) -> Unit,
 ) {
+
     Scaffold(
         topBar = {
-            TopAppBar() {
+            TopAppBar {
                 Spacer(Modifier.weight(1f, true))
                 IconButton(onClick = {}) {
                     Icon(
@@ -36,7 +37,6 @@ fun HomeScreen(
         }
     ) {
 
-
         Log.d("TAG", "-------HomeScreen----------")
 
 
@@ -47,11 +47,11 @@ fun HomeScreen(
                 .padding(12.dp)
         ) {
             items(
-                data.size,
+                viewModel.data.size,
                 itemContent = {
                     Element(
-                        id = data[it].id,
-                        color = data[it].color,
+                        id = viewModel.data[it].id,
+                        color = viewModel.data[it].color,
                         onNavigateToDetails
                     )
                 })
@@ -60,19 +60,13 @@ fun HomeScreen(
     }
 
 }
-//   DetailScreen(i = list.size )
-
 
 @Composable
 fun Element(
     id: Int,
     color: Int,
-    onNavigateToDetails: (Int, String, String) -> Unit,
+    onNavigateToDetails: (Int, String, String, Int) -> Unit,
 ) {
-    val stateBg = remember {
-        mutableStateOf(false)
-
-    }
     val context = LocalContext.current
     val title = "Title $id"
     val description = "Description $id"
@@ -88,21 +82,18 @@ fun Element(
                         Toast.LENGTH_SHORT
                     )
                     .show()
-                //                stateBg.value = !stateBg.value
-                onNavigateToDetails.invoke(id, title, description)
+                onNavigateToDetails.invoke(id, title, description, color)
             }
-            //            .background(if (stateBg.value) Color.Red else Color.White)
             .background(Color(color))
             .border(width = 3.dp, color = Color.Black)
             .padding(16.dp)
     ) {
 
-
         Icon(
             painter = painterResource(id = R.drawable.ic_launcher_foreground),
             contentDescription = null,
         )
-        Column() {
+        Column {
             Text(
                 title,
                 modifier = Modifier
@@ -120,7 +111,6 @@ fun Element(
     }
 
 }
-
 
 @Preview(showBackground = true)
 @Composable
