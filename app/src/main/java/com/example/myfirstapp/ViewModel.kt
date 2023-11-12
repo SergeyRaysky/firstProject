@@ -1,10 +1,12 @@
 package com.example.myfirstapp
 
 import android.graphics.Color
+import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 
 class HomeViewModel: ViewModel() {
-  private val colors = listOf(
+
+        val colors = listOf(
         Color.RED,
         Color.GREEN,
         Color.YELLOW,
@@ -16,10 +18,13 @@ class HomeViewModel: ViewModel() {
         Color.MAGENTA,
         Color.TRANSPARENT
     )
-    val data = List(100) {
+    var stateColor = mutableStateOf(colors.random())
+    var data = List(100) {
+
         Item(
             id = it,
-            color = colors.random()
+            color = stateColor.value
+
         )
     }
 }

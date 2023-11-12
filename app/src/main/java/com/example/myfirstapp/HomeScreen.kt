@@ -27,7 +27,7 @@ fun HomeScreen(
         topBar = {
             TopAppBar {
                 Spacer(Modifier.weight(1f, true))
-                IconButton(onClick = {}) {
+                IconButton(onClick = {viewModel.stateColor.value = viewModel.colors.random()}) {
                     Icon(
                         Icons.Filled.Search,
                         contentDescription = "Кнопка поиска"
@@ -109,8 +109,9 @@ fun Element(
         }
 
     }
-
+ 
 }
+
 
 @Preview(showBackground = true)
 @Composable
