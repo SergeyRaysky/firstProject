@@ -7,6 +7,8 @@ import androidx.compose.foundation.layout.*
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material.*
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.KeyboardArrowDown
+import androidx.compose.material.icons.filled.KeyboardArrowUp
 import androidx.compose.material.icons.filled.Search
 import androidx.compose.runtime.*
 import androidx.compose.ui.Modifier
@@ -22,12 +24,23 @@ fun HomeScreen(
     viewModel: HomeViewModel,
     onNavigateToDetails: (Int, String, String, Int) -> Unit,
 ) {
-
     Scaffold(
         topBar = {
             TopAppBar {
+                IconButton(onClick = {
+                    if (viewModel.sortFlag.value != true){
+                        viewModel.sortedKey()
+                    }
+                    else viewModel.sortedByDesKey()
+                }) {
+                   Icon(if(viewModel.sortFlag.value != true){
+                            Icons.Filled.KeyboardArrowUp
+                   }
+                       else Icons.Filled.KeyboardArrowDown,
+                       contentDescription = "Кнопка сортировки" )
+                }
                 Spacer(Modifier.weight(1f, true))
-                IconButton(onClick = {viewModel.stateColor.value = viewModel.colors.random()}) {
+                IconButton(onClick = {viewModel.refreshData()}) {
                     Icon(
                         Icons.Filled.Search,
                         contentDescription = "Кнопка поиска"
@@ -47,11 +60,12 @@ fun HomeScreen(
                 .padding(12.dp)
         ) {
             items(
-                viewModel.data.size,
+                viewModel.data.value.size,
                 itemContent = {
                     Element(
-                        id = viewModel.data[it].id,
-                        color = viewModel.data[it].color,
+                        id = viewModel.data.value[it].id,
+                        key = viewModel.data.value[it].key,
+                        color = viewModel.data.value[it].color,
                         onNavigateToDetails
                     )
                 })
@@ -64,12 +78,13 @@ fun HomeScreen(
 @Composable
 fun Element(
     id: Int,
+    key: Int,
     color: Int,
     onNavigateToDetails: (Int, String, String, Int) -> Unit,
 ) {
     val context = LocalContext.current
     val title = "Title $id"
-    val description = "Description $id"
+    val description = "key: $key"
     Log.d("TAG", "-------Element $id----------")
     Row(
         modifier = Modifier
