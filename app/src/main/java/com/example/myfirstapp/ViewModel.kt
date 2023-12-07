@@ -39,21 +39,24 @@ class HomeViewModel: ViewModel() {
         }
 
     fun sortedKey(){
-        val list = mutableListOf<Item>()
+        if(!sortFlag.value) {
+            val list = mutableListOf<Item>()
+            list.addAll(data.value)
+            list.sortBy { it.key }
+            data.value = list
+
+            Log.d("TAG", "${data.value}")
+            sortFlag.value = true
+        }
+        else  {
+            val list = mutableListOf<Item>()
         list.addAll(data.value)
-        list.sortBy { it.key }
+        list.sortByDescending { it.key }
         data.value = list
 
         Log.d("TAG", "${data.value}")
-        sortFlag.value = true
-    }
-
-    fun sortedByDesKey(){
-        val list2 = mutableListOf<Item>()
-        list2.addAll(data.value)
-        list2.sortByDescending { it.key }
-        data.value = list2
         sortFlag.value = false
+            }
     }
     }
 

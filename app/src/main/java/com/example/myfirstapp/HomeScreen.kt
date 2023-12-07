@@ -28,12 +28,9 @@ fun HomeScreen(
         topBar = {
             TopAppBar {
                 IconButton(onClick = {
-                    if (viewModel.sortFlag.value != true){
                         viewModel.sortedKey()
-                    }
-                    else viewModel.sortedByDesKey()
                 }) {
-                   Icon(if(viewModel.sortFlag.value != true){
+                   Icon(if(!viewModel.sortFlag.value){
                             Icons.Filled.KeyboardArrowUp
                    }
                        else Icons.Filled.KeyboardArrowDown,
