@@ -1,7 +1,6 @@
 package com.example.myfirstapp
 
 import android.graphics.Color
-import android.util.Log
 import androidx.compose.runtime.mutableStateOf
 import androidx.lifecycle.ViewModel
 import kotlin.random.Random
@@ -39,24 +38,17 @@ class HomeViewModel: ViewModel() {
         }
 
     fun sortedKey(){
+        val list = mutableListOf<Item>()
+        list.addAll(data.value)
         if(!sortFlag.value) {
-            val list = mutableListOf<Item>()
-            list.addAll(data.value)
             list.sortBy { it.key }
-            data.value = list
-
-            Log.d("TAG", "${data.value}")
             sortFlag.value = true
         }
         else  {
-            val list = mutableListOf<Item>()
-        list.addAll(data.value)
         list.sortByDescending { it.key }
-        data.value = list
-
-        Log.d("TAG", "${data.value}")
         sortFlag.value = false
             }
+        data.value = list
     }
     }
 
