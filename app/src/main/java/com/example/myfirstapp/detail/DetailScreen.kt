@@ -1,5 +1,6 @@
-package com.example.myfirstapp
+package com.example.myfirstapp.detail
 
+import android.annotation.SuppressLint
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.*
 import androidx.compose.material.*
@@ -12,15 +13,15 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import com.example.myfirstapp.R
 
 
+@SuppressLint("UnusedMaterialScaffoldPaddingParameter")
 @Composable
 fun DetailScreen(
-    id: Int,
-    title: String,
-    description: String,
-    color: Int,
-    onNavigateToHome: () -> Unit
+    detailViewModel: DetailViewModel,
+    onNavigateToHome: () -> Unit,
+    onNavigateToOy: (String, Int) -> Unit
 ) {
 
     Scaffold(
@@ -33,7 +34,7 @@ fun DetailScreen(
                             contentDescription = "Меню"
                         )
                     }
-                    Text("$id", fontSize = 24.sp)
+                    Text("${detailViewModel.id}", fontSize = 24.sp)
                 }
             }
         }
@@ -41,19 +42,24 @@ fun DetailScreen(
 
         Column(
             modifier = Modifier
-                .fillMaxSize()
-                .background(Color(color)),
+                .fillMaxSize(),
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
+            IconButton(onClick = { detailViewModel.titleOy()}) {
             Icon(
                 modifier = Modifier.size(size = 240.dp),
                 painter = painterResource(id = R.drawable.ic_launcher_foreground),
                 contentDescription = null
             )
-            Text("$title ", fontSize = 32.sp)
-            Text(description, fontSize = 32.sp)
+        }
+            Text("${detailViewModel.detailTitle.value} ", fontSize = 32.sp)
+            Text(detailViewModel.description, fontSize = 32.sp)
+            if(detailViewModel.count.intValue == 5){
+       //onNavigateToOy.invoke(detailViewModel.description, detailViewModel.color)
+            }
         }
     }
+
 }
 
