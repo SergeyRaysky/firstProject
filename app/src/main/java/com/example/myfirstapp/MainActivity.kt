@@ -40,7 +40,7 @@ class MainActivity : ComponentActivity() {
                         navArgument("id") { type = NavType.IntType },
                         navArgument("title") { type = NavType.StringType },
                         navArgument("description") { type = NavType.StringType },
-                        )
+                    )
 
                 ) {
 
@@ -62,17 +62,17 @@ class MainActivity : ComponentActivity() {
 
                 }
 
-//                composable(
-//                    "oyScreen/{key}",
-//                    arguments = listOf(navArgument("key") { type = NavType.StringType },
-//                        navArgument("color") { type = NavType.IntType })
-//                ) {
-//                    val keyId = it.arguments?.getString("key") ?: "error"
-//                    OyScreen(
-//                        key = keyId,
-//                        onBackFun = { navController.popBackStack() },
-//                        onBackHome = {})
-//                }
+                composable(
+                    "oyScreen/{key}",
+                    arguments = listOf(navArgument("key") { type = NavType.StringType },
+                        navArgument("color") { type = NavType.IntType })
+                ) {
+                    val keyId = it.arguments?.getString("key") ?: "error"
+                    OyScreen(
+                        key = keyId,
+                        onBackFun = { navController.popBackStack() },
+                        onBackHome = {})
+                }
 
             }
         }

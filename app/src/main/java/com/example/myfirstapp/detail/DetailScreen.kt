@@ -21,7 +21,7 @@ import com.example.myfirstapp.R
 fun DetailScreen(
     detailViewModel: DetailViewModel,
     onNavigateToHome: () -> Unit,
-    onNavigateToOy: (String, Int) -> Unit
+    onNavigateToOy: (String, Int) -> Unit,
 ) {
 
     Scaffold(
@@ -46,17 +46,17 @@ fun DetailScreen(
             verticalArrangement = Arrangement.Center,
             horizontalAlignment = Alignment.CenterHorizontally
         ) {
-            IconButton(onClick = { detailViewModel.titleOy()}) {
-            Icon(
-                modifier = Modifier.size(size = 240.dp),
-                painter = painterResource(id = R.drawable.ic_launcher_foreground),
-                contentDescription = null
-            )
-        }
+            IconButton(onClick = { detailViewModel.titleOy() }) {
+                Icon(
+                    modifier = Modifier.size(size = 240.dp),
+                    painter = painterResource(id = R.drawable.ic_launcher_foreground),
+                    contentDescription = null
+                )
+            }
             Text("${detailViewModel.detailTitle.value} ", fontSize = 32.sp)
             Text(detailViewModel.description, fontSize = 32.sp)
-            if(detailViewModel.count.intValue == 5){
-       //onNavigateToOy.invoke(detailViewModel.description, detailViewModel.color)
+            if (detailViewModel.count.intValue == 5) {
+                //onNavigateToOy.invoke(detailViewModel.description, detailViewModel.color)
             }
         }
     }

@@ -24,9 +24,9 @@ fun HomeScreen(
 ) {
     Scaffold(
         topBar = {
-//            TopAppBar {
-//                IconButton(onClick = {
-//                        viewModel.sortedKey()
+//          TopAppBar {
+//              IconButton(onClick = {
+//                      viewModel.sortedKey()
 //                }) {
 //                   Icon(if(!viewModel.sortFlag.value){
 //                            Icons.Filled.KeyboardArrowUp
@@ -34,7 +34,7 @@ fun HomeScreen(
 //                       else Icons.Filled.KeyboardArrowDown,
 //                       contentDescription = "Кнопка сортировки" )
 //                }
-//                Spacer(Modifier.weight(1f, true))
+//               Spacer(Modifier.weight(1f, true))
 //                IconButton(onClick = {viewModel.refreshData()}) {
 //                    Icon(
 //                        Icons.Filled.Refresh,
@@ -59,7 +59,7 @@ fun HomeScreen(
                 itemContent = {
                     Element(
                         id = viewModel.data.value[it].author,
-        key = viewModel.data.value[it].title,
+                        key = viewModel.data.value[it].title,
                         onNavigateToDetails
                     )
                 })

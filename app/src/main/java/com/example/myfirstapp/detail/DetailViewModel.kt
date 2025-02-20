@@ -10,7 +10,7 @@ class DetailViewModel(var id: Int, var title: String, var description: String) :
     var count = mutableIntStateOf(0)
     fun titleOy() {
         detailTitle.value = detailTitle.value + " oy"
-        count.intValue = count.intValue+ 1
+        count.intValue = count.intValue + 1
 
     }
 }
